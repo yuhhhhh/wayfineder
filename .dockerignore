@@ -1,0 +1,14 @@
+.git
+.github
+.env
+.env.*
+!.env.example
+data
+runtime
+dist
+coverage
+node_modules
+*.db*
+*.sqlite*
+*.log*
+

@@ -1,0 +1,40 @@
+[Unit]
+Description=Wayfinder read-only NAS assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wayfinder
+Group=wayfinder
+WorkingDirectory=/opt/wayfinder
+EnvironmentFile=/etc/wayfinder/wayfinder.env
+ExecStart=/usr/bin/node --enable-source-maps /opt/wayfinder/dist/main.js
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+UMask=0077
+
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/wayfinder
+InaccessiblePaths=-/run/docker.sock -/var/run/docker.sock
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+RestrictNamespaces=true
+RestrictRealtime=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,35 @@
+# Development/build verification only. This does not observe the NAS host namespace.
+services:
+  wayfinder:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      WAYFINDER_DATA_DIR: /var/lib/wayfinder
+      WAYFINDER_HEALTH_PORT: "3030"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    volumes:
+      - wayfinder-data:/var/lib/wayfinder
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:3030/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  wayfinder-data:

@@ -1,0 +1,56 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Runtime state (sessions, approvals, audits, and SQLite sidecars)
+data/
+runtime/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Logs and process state
+logs/
+*.log
+*.log.*
+*.pid
+*.pid.lock
+
+# Editors and operating systems
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.code-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Tool caches and temporary files
+.cache/
+.npm/
+.tmp/
+tmp/
+*.tmp
+*.bak
+*.orig
+*.rej
